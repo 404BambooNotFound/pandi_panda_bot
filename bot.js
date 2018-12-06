@@ -2,7 +2,7 @@ class Bot {
 
     constructor() {
         this.feeling = "";
-        this.responsePool = JSON.parse()
+        this.responsePool = kmkenfkefnkenk;
     }
 
     getPrefix() {

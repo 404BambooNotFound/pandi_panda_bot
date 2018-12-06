@@ -1,0 +1,10 @@
+[
+  {
+    "keyword" : ["Bonjour", "hello"],
+    "reponses" : {
+      "default" : "reponse",
+      "angry" : "Panda this bambou",
+      "happy" : "I'm so panda"
+    }
+  }
+]
