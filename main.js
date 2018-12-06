@@ -1,5 +1,6 @@
-var bot_prefix = "[Pandi Panda]";
-var user_prefix = "[Super intelligent human]";
+let user_prefix = "[Super intelligent human]";
+let bot = new Bot();
+
 
 $(document).ready(function () {
     $('#main_text').keypress(function (e) {
@@ -10,20 +11,25 @@ $(document).ready(function () {
 });
 
 function onTextSubmited() {
-    var text_field = $("#main_text");
+    let text_field = $("#main_text");
 
-    addDialog(text_field.val(), false);
+    let userSentence = text_field.val();
+
+    addDialog(userSentence, false);
+
+    let response = bot.getResponse(userSentence);
+
     addDialog("response", true);
 }
 
 function addDialog(text, isBot) {
 
-    var p = $("<p></p>");
+    let p = $("<p></p>");
 
     p.addClass("dialog");
 
     if (isBot) {
-        p.append(bot_prefix);
+        p.append(bot.getPrefix());
         p.addClass("bot_dialog");
     } else {
         p.append(user_prefix);
@@ -32,6 +38,6 @@ function addDialog(text, isBot) {
 
     p.append(" " + text);
 
-    var dialog_histo = $("#dialog_historic");
+    let dialog_histo = $("#dialog_historic");
     dialog_histo.append(p);
 }
