@@ -1,3 +1,23 @@
 body {
 	background-color: grey;
 }
+
+#dialog_historic {
+	background-color: cornsilk;
+	position: center;
+	min-height: 100px;
+	max-width: 10%;
+	vertical-align: center;
+}
+
+.dialog {
+	margin: 0;
+}
+
+.user_dialog {
+	color:red;
+}
+
+.bot_dialog {
+	color: blue;
+}
