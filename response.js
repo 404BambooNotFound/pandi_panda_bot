@@ -3,25 +3,23 @@ let responses = [
     {
         "keyword": ["bonjour", "hello", "salut", "coucou", "yo", "wesh", "kikou", "allo", "guten tag", "konichiwa", "ohayo", "ohayou"],
         "responses": {
-            "default": ["Salut, je suis là pour t'aider. Enfin je crois..."],
-            "angry" : ["Ouais, salut. Qu'est-ce que tu veux ?" ],
+            "default": ["Salut, je suis là pour t'aider. Enfin je crois...", "Oui, bonjour."],
+            "angry" : ["Ouais, salut. Qu'est-ce que tu veux ?", "Quoi encore ?" ],
             "happy" : ["Hello mon cher ! Que puis-je faire pour toi ?"]
         }
     },
     {
-        "keyword": ["au revoir", "bitre"],
+        "keyword": ["au revoir", "bye", "good bye"],
         "responses": {
-            "default": ["deded"],
-            "angry": ["dede"],
-            "happy": ["deded"]
+            "default": ["Au revoir"],
+            "angry": ["Bon vent"]
         }
     },
     {
-        "keyword": undefined,
+        "keyword": [""],
         "responses": {
-            "default": ["ffefef"],
-            "angry": ["efefefe"],
-            "happy": ["efefefefe"]
+            "default": [""],
+            "angry": [""]
         }
     }
 ];
