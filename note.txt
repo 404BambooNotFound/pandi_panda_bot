@@ -1,0 +1,46 @@
+
+Dictionnaire
+    - Demande ==> reponse
+
+Etapes
+    question / phrase
+    traitement
+    reponse
+
+
+Reponse
+    en fonction de la demande
+
+
+dictionnaire
+    json
+
+    [
+        {
+            "keyword" : ["Bonjour", "HELLO", ...],
+            "reponses" : {
+                "default" : "reponse",
+                "angry" : "Panda this bambou",
+                "happy" : "I'm so panda"
+            },
+
+        },
+    ]
+
+
+stocker l'etat de la conversation
+
+
+Ce que doit faire le bot :
+    change de langue a des moments random
+        leet
+        que des mots pas tous
+
+    pas de reponses
+        si ya pas de reponses en un certain temps il doit mettre des messages
+
+    repondre aux questions
+
+    commande help
+        "veut jouer ???"
+
