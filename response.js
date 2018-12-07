@@ -24,3 +24,7 @@ let responses = [
         }
     }
 ];
+
+let special_responces = {
+    "waiting_too_much" : ["", ""]
+};
