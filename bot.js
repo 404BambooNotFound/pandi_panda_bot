@@ -136,45 +136,55 @@ class Bot {
             return !stopwords.includes(w);
         });
 
-        if (usefullWords) {
-
+        // If the user just sent nothing important
+        if (usefullWords.length === 0) {
+            let rep = special_responces["no_response_match"];
+            return rep[Math.floor(Math.random() * rep.length)];
         }
 
-        return "ouais ouais ouais";
+        // it's time to check if the user is dumb or not
+        // lets make a Wikipedia research
+
+        let search = usefullWords.join(" ");
+
+        let wikiResponse = this.wikiSearch(search);
+
+        if (wikiResponse.length === 0) {
+            let rep = special_responces["no_wiki_response_match"];
+            return rep[Math.floor(Math.random() * rep.length)];
+        } else if(wikiResponse.length === 1) {
+            let rep = special_responces["one_wiki_response_match"];
+            let theone = wikiResponse[0];
+            return rep[Math.floor(Math.random() * rep.length)].format(theone.title, theone.snippet);
+        }
+
+        let rep = special_responces["too_much_wiki_response_match"];
+        return rep[Math.floor(Math.random() * rep.length)].format(wikiResponse.length);
     }
 
     wikiSearch(searchQuery) {
-        const endpoint = `https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch=${encodeURI(searchQuery)}`;
-        fetch(endpoint)
-            .then(response => response.json())
-            .then(data => {
-                const results = data.query.search;
-                displayResults(results);
-            })
-            .catch((e) => console.log(e));
-    }
 
-    displayResults(results) {
-        // TODO Build response and add it to the list to permit
+        let responseArray = [];
 
-
-        // Store a reference to `.searchResults`
-        const searchResults = document.querySelector('.searchResults');
-        // Remove all child elements
-        searchResults.innerHTML = '';
-        // Loop over results array
-        results.forEach(result => {
-            const url = encodeURI(`https://en.wikipedia.org/wiki/${result.title}`);
-
-            searchResults.insertAdjacentHTML('beforeend',
-                `<div class="resultItem">
-        <h3 class="resultItem-title">
-          <a href="${url}" target="_blank" rel="noopener">${result.title}</a>
-        </h3>
-        <span class="resultItem-snippet">${result.snippet}</span><br>
-        <a href="${url}" class="resultItem-link" target="_blank" rel="noopener">${url}</a>
-      </div>`
-            );
+        $.ajax({
+            url: 'https://fr.wikipedia.org/w/api.php',
+            async: false,
+            data: {
+                action: 'query',
+                list: "search",
+                prop: 'info',
+                inprop: 'url',
+                utf8: '',
+                format: 'json',
+                srlimit: 30,
+                srsearch: encodeURI(searchQuery),
+                origin: '*'
+            },
+            success: function (data) {
+                responseArray = data;
+            }
         });
+
+        return responseArray.query.search;
     }
 }
