@@ -16,7 +16,11 @@ let responses = [
 ];
 
 let special_responces = {
-    "waiting_too_much" : ["", ""]
+    "waiting_too_much" : ["", ""],
+    "no_response_match" : [""],
+    "no_wiki_response_match" : [""],
+    "one_wiki_response_match" : ["{0} avec {1}"], // {0} => titre du match {1}=> snipet du match
+    "too_much_wiki_response_match" : ["{0}"] // {0} => nombre de match wiki
 };
 
 
