@@ -5,12 +5,12 @@ let bot = new Bot();
 $(document).ready(function () {
     $('#main_text').keypress(function (e) {
         if (e.which === 13) {
-            onTextSubmited();
+            onTextSubmitted();
         }
     });
 });
 
-function onTextSubmited() {
+function onTextSubmitted() {
     let text_field = $("#main_text");
 
     let userSentence = text_field.val();
@@ -19,7 +19,7 @@ function onTextSubmited() {
 
     let response = bot.getResponse(userSentence);
 
-    addDialog("response", true);
+    addDialog(response, true);
 }
 
 function addDialog(text, isBot) {
