@@ -136,7 +136,7 @@ class Bot {
             return !stopwords.includes(w);
         });
 
-        if(usefullWords) {
+        if (usefullWords) {
 
         }
 
