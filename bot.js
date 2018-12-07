@@ -121,4 +121,15 @@ class Bot {
             return "Mes developpeurs ne sont pas fort, je suis planté ...";
         }
     }
+
+    wikiSearch(searchQuery) {
+  	  const endpoint = `https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch=${encodeURI(searchQuery)}`;
+    	fetch(endpoint)
+    		.then(response => response.json())
+    		.then(data => {
+    	  	const results = data.query.search;
+          displayResults(results);
+  		})
+      .catch(() => console.log('An error occurred'));
+  }
 }
