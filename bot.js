@@ -16,19 +16,19 @@ class Bot {
         };
 
         // setup the thread to check whenever the user is away
-        this.open();
+        this.awake();
     }
 
     getPrefix() {
         return this.prefixs[this.mood] + " ";
     }
 
-    open() {
+    awake() {
         this.lastMessageDate = new Date().getTime();
         setInterval(this.checkMessagesTime, 5000);
     }
 
-    stop() {
+    sleep() {
         clearInterval();
     }
 
@@ -43,6 +43,8 @@ class Bot {
     }
 
     sendWaitingMessage() {
+        this.mood = moodList.angry;
+
         let specialResponse = special_responces["waiting_too_much"];
 
         this.addDialog(specialResponse[Math.floor(Math.random() * specialResponse.length)], true);
@@ -104,13 +106,18 @@ class Bot {
                     }
                 }
 
-                if (nbContainedKeywords > bestResponse.keywordCount || (!keywords && bestResponse.keywordCount === 0)) {
+                if (nbContainedKeywords > bestResponse.keywordCount) {
                     bestResponse.keywordCount = nbContainedKeywords;
                     bestResponse.response = response;
                 }
             }
 
-            let responseSet = bestResponse.response.responses[feelings.default];
+            if (!bestResponse.response) {
+                return this.manageNoMatching(userSentence);
+            }
+
+            // Check if there is a response for the current mood, else just send the default message
+            let responseSet = bestResponse.response.responses[moodList.default];
             if (bestResponse.response.responses[this.mood]) {
                 responseSet = bestResponse.response.responses[this.mood];
             }
@@ -120,6 +127,20 @@ class Bot {
         } catch (e) {
             return "Mes developpeurs ne sont pas fort, je suis planté ...";
         }
+    }
+
+    manageNoMatching(userSentence) {
+
+        // remove unused words called stopwords
+        let usefullWords = userSentence.split(" ").filter(function (w) {
+            return !stopwords.includes(w);
+        });
+
+        if(usefullWords) {
+
+        }
+
+        return "ouais ouais ouais";
     }
 
     wikiSearch(searchQuery) {
