@@ -3,6 +3,8 @@ let moodList = {
     angry: "angry"
 };
 
+const leest = {"a" : "@", "b" : "8", "c" : "(", "d" : "|]", "e" : "3", "f" : "|#", "g" : "6", "h" : "4", "i" : "!", "j" : "_|", "k" : "|<", "l" : "1", "m" : "/\\/\\", "n" : "|\\|", "o" : "0", "p" : "|°", "q" : "9", "r" : "|2", "s" : "5", "t" : "7", "u" : "(_)", "v" : "\\/", "w" : "\\^/", "x" : "%", "y" : "¥", "z" : "2"};
+
 class Bot {
     constructor() {
         this.mood = moodList.default;
@@ -176,5 +178,14 @@ class Bot {
       </div>`
             );
         });
+    }
+
+
+    toLeet(message) {
+      var leetMsg = "";
+      for (let letter of message) {
+        leetMsg = leetMsg.concat(Object.values(leest)[letter.toLowerCase().charCodeAt()-97]);
+      }
+      return leetMsg;
     }
 }
